@@ -12,7 +12,7 @@ export default function Header() {
             <img 
               src="/logo.png" 
               alt="Zuno Logo" 
-              className="w-6 h-6 md:w-8 md:h-8 object-contain"
+              className="w-9 h-9 md:w-12 md:h-12 object-contain"
             />
             
           </div>
