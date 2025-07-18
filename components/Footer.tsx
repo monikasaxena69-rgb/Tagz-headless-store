@@ -1,45 +1,82 @@
-// components/Footer.tsx
 export default function Footer() {
   return (
-    <footer className="bg-background border-t border-text-muted">
-      <div className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Support Column */}
-        <div>
-          <h3 className="text-lg font-semibold text-text-light mb-4">Support</h3>
-          <ul className="space-y-2">
-            {['Help Center','Contact Us','Warranty','Returns'].map((item) => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase().replace(/ /g, '-')}`}
-                  className="text-text-muted hover:text-highlight transition-colors"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <footer className="bg-background border-t border-text-muted/20 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Logo and description */}
+          <div className="md:col-span-1">
+            <div className="flex items-center space-x-2 mb-4">
+              <img 
+                src="/logo.png" 
+                alt="Zuno Logo" 
+                className="w-8 h-8 object-contain"
+              />
+              <span className="text-xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
+                Zuno
+              </span>
+            </div>
+            <p className="text-text-muted text-sm mb-4">
+              Never lose anything again with our smart tracking technology.
+            </p>
+            <div className="flex space-x-3">
+              <a href="#" className="text-text-muted hover:text-highlight transition-colors">📘</a>
+              <a href="#" className="text-text-muted hover:text-highlight transition-colors">📷</a>
+              <a href="#" className="text-text-muted hover:text-highlight transition-colors">🐦</a>
+            </div>
+          </div>
+
+          {/* Products */}
+          <div>
+            <h3 className="text-text-light font-semibold mb-4">Products</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Card</a></li>
+              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Key</a></li>
+              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Pro</a></li>
+              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Accessories</a></li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="text-text-light font-semibold mb-4">Support</h3>
+            <ul className="space-y-2 text-sm">
+              {['Help Center','Contact Us','Warranty','Returns'].map((item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase().replace(/ /g, '-')}`}
+                    className="text-text-muted hover:text-highlight transition-colors"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-text-light font-semibold mb-4">Company</h3>
+            <ul className="space-y-2 text-sm">
+              {['About Us','Careers','Privacy','Terms'].map((item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase().replace(/ /g, '-')}`}
+                    className="text-text-muted hover:text-highlight transition-colors"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Company Column */}
-        <div>
-          <h3 className="text-lg font-semibold text-text-light mb-4">Company</h3>
-          <ul className="space-y-2">
-            {['About Us','Careers','Privacy','Terms'].map((item) => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase().replace(/ /g, '-')}`}
-                  className="text-text-muted hover:text-highlight transition-colors"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="border-t border-text-muted/20 pt-8 text-center">
+          <p className="text-text-muted text-sm">
+            © {new Date().getFullYear()} Zuno Labs. All rights reserved. Made with ❤️ for peace of mind.
+          </p>
         </div>
       </div>
-      <div className="text-center text-sm text-text-muted pb-6">
-        © {new Date().getFullYear()} Zuno Labs. Made with ❤️ for peace of mind.
-      </div>
     </footer>
-  )
+  );
 }
