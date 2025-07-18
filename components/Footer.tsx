@@ -41,7 +41,7 @@ export default function Footer() {
         // Fallback to default products if fetch fails
         setProducts([
           { id: '1', handle: 'zuno-card', title: 'Zuno Card' },
-          { id: '2', handle: 'zuno-key', title: 'Zuno Key' },
+          { id: '2', handle: 'zuno-clip', title: 'Zuno Clip' },
           { id: '3', handle: 'zuno-pro', title: 'Zuno Pro' }
         ]);
       }
