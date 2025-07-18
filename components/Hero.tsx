@@ -6,7 +6,7 @@ export default function Hero() {
   
   const slides = [
     {
-      title: "Never Lose Anything Again",
+      title: "Never Lose Anyting Again",
       subtitle: "Smart tracking technology that adapts to your lifestyle",
       cta: "Shop Trackers",
       highlight: "New Release",
