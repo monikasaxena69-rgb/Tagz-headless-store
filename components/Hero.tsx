@@ -35,55 +35,73 @@ export default function Hero() {
   }, [slides.length]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].bg} transition-all duration-1000`} />
       
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-highlight/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-10 left-5 md:top-20 md:left-10 w-32 h-32 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-10 right-5 md:bottom-20 md:right-10 w-48 h-48 md:w-96 md:h-96 bg-highlight/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-highlight/20 text-highlight font-semibold text-sm mb-6 animate-bounce">
+        <div className="inline-flex items-center px-3 py-2 md:px-4 md:py-2 rounded-full bg-highlight/20 text-highlight font-semibold text-xs md:text-sm mb-6 animate-bounce">
           <span className="mr-2">✨</span>
           {slides[currentSlide].highlight}
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold text-text-light mb-6 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-text-light mb-6 leading-tight px-2">
           <span className="bg-gradient-to-r from-text-light via-highlight to-primary bg-clip-text text-transparent">
             {slides[currentSlide].title}
           </span>
         </h1>
 
-        <p className="text-xl md:text-2xl text-text-muted mb-8 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-lg sm:text-xl md:text-2xl text-text-muted mb-8 max-w-3xl mx-auto leading-relaxed px-4">
           {slides[currentSlide].subtitle}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <button className="bg-primary hover:bg-primary/80 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200 transform hover:scale-105">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 px-4">
+          <button className="w-full sm:w-auto bg-primary hover:bg-primary/80 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition-all duration-200 transform hover:scale-105">
             {slides[currentSlide].cta}
           </button>
-          <button className="border border-text-muted hover:border-highlight text-text-light hover:text-highlight px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200 transform hover:scale-105">
+          <button className="w-full sm:w-auto border border-text-muted hover:border-highlight text-text-light hover:text-highlight px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold transition-all duration-200 transform hover:scale-105">
             Watch Demo
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto px-4">
           {[
             { name: "Zuno Card", price: "$29", feature: "Ultra-thin design" },
             { name: "Zuno Key", price: "$39", feature: "Keychain friendly" },
             { name: "Zuno Pro", price: "$49", feature: "Premium materials" }
           ].map((product, index) => (
-            <div key={product.name} className="bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-2xl p-6 hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 group">
-              <div className="w-full h-32 bg-gradient-to-br from-primary/20 to-highlight/20 rounded-lg mb-4 flex items-center justify-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-highlight rounded-lg shadow-lg group-hover:rotate-12 transition-transform duration-300" />
+            <div key={product.name} className="bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-2xl p-4 md:p-6 hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 group">
+              <div className="w-full h-24 md:h-32 bg-gradient-to-br from-primary/20 to-highlight/20 rounded-lg mb-4 flex items-center justify-center">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-primary to-highlight rounded-lg shadow-lg group-hover:rotate-12 transition-transform duration-300" />
               </div>
-              <h3 className="text-lg font-semibold text-text-light mb-2">{product.name}</h3>
-              <p className="text-text-muted text-sm mb-3">{product.feature}</p>
-              <p className="text-highlight font-bold text-xl">{product.price}</p>
+              <h3 className="text-base md:text-lg font-semibold text-text-light mb-2">{product.name}</h3>
+              <p className="text-text-muted text-xs md:text-sm mb-3">{product.feature}</p>
+              <p className="text-highlight font-bold text-lg md:text-xl">{product.price}</p>
             </div>
           ))}
         </div>
+
+        <div className="flex justify-center space-x-3 mt-8">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'bg-highlight scale-125' : 'bg-text-muted/50 hover:bg-text-muted'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg className="w-5 h-5 md:w-6 md:h-6 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </div>
     </section>
   );
