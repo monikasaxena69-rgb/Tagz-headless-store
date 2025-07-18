@@ -159,11 +159,11 @@ export default function ProductShowcase({ initialProducts = [] }: ProductShowcas
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
                       <span className="text-2xl font-bold text-highlight">
-                        ${parseFloat(price || '0').toFixed(2)}
+                        ₹{parseFloat(price || '0').toFixed(2)}
                       </span>
                       {compareAtPrice && (
                         <span className="text-sm text-text-muted line-through">
-                          ${parseFloat(compareAtPrice).toFixed(2)}
+                          ₹{parseFloat(compareAtPrice).toFixed(2)}
                         </span>
                       )}
                     </div>

@@ -72,9 +72,9 @@ export default function Hero() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto px-4">
           {[
-            { name: "Zuno Card", price: "$29", feature: "Ultra-thin design" },
-            { name: "Zuno Key", price: "$39", feature: "Keychain friendly" },
-            { name: "Zuno Pro", price: "$49", feature: "Premium materials" }
+            { name: "Zuno Card", price: "₹29", feature: "Ultra-thin design" },
+            { name: "Zuno Key", price: "₹39", feature: "Keychain friendly" },
+            { name: "Zuno Pro", price: "₹49", feature: "Premium materials" }
           ].map((product, index) => (
             <div key={product.name} className="bg-background/70 backdrop-blur-md border border-primary/30 rounded-2xl p-4 md:p-6 hover:border-highlight/70 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 group">
               <div className="w-full h-24 md:h-32 bg-gradient-to-br from-primary/40 via-accent1/30 to-highlight/40 rounded-lg mb-4 flex items-center justify-center shadow-lg">

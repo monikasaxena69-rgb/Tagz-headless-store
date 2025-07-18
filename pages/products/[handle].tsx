@@ -94,11 +94,11 @@ export default function ProductPage({ product }: ProductPageProps) {
                 
                 <div className="flex items-center space-x-4 mb-6">
                   <span className="text-3xl font-bold text-highlight">
-                    ${parseFloat(price || '0').toFixed(2)}
+                    ₹{parseFloat(price || '0').toFixed(2)}
                   </span>
                   {compareAtPrice && (
                     <span className="text-xl text-text-muted line-through">
-                      ${parseFloat(compareAtPrice).toFixed(2)}
+                      ₹{parseFloat(compareAtPrice).toFixed(2)}
                     </span>
                   )}
                   <span className="text-sm text-text-muted">{currencyCode}</span>
@@ -143,7 +143,7 @@ export default function ProductPage({ product }: ProductPageProps) {
                   className="w-full bg-primary hover:bg-primary/80 text-white py-4 px-8 rounded-full text-lg font-semibold transition-colors duration-200 transform hover:scale-105"
                   disabled={!mainVariant?.availableForSale}
                 >
-                  {mainVariant?.availableForSale ? `Add to Cart - $${parseFloat(price || '0').toFixed(2)}` : 'Out of Stock'}
+                  {mainVariant?.availableForSale ? `Add to Cart - ₹${parseFloat(price || '0').toFixed(2)}` : 'Out of Stock'}
                 </button>
                 
                 <button className="w-full border border-text-muted hover:border-highlight text-text-light hover:text-highlight py-4 px-8 rounded-full text-lg font-semibold transition-all duration-200">
@@ -151,22 +151,7 @@ export default function ProductPage({ product }: ProductPageProps) {
                 </button>
               </div>
 
-              {/* Product Tags */}
-              {product.tags && product.tags.length > 0 && (
-                <div className="border-t border-text-muted/20 pt-6">
-                  <h3 className="text-lg font-semibold text-text-light mb-4">Tags</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {product.tags.map((tag: string, index: number) => (
-                      <span 
-                        key={index}
-                        className="px-3 py-1 bg-background border border-text-muted/30 rounded-full text-sm text-text-muted"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
+
             </div>
           </div>
         </div>
