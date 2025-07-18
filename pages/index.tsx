@@ -1,8 +1,19 @@
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import ProductShowcase from '../components/ProductShowcase';
+import Features from '../components/Features';
+import Newsletter from '../components/Newsletter';
+import Footer from '../components/Footer';
+
 export default function Home() {
   return (
-    <main className="bg-background text-text-light min-h-screen p-8">
-      <h1 className="text-4xl font-bold">Welcome to Zuno</h1>
-      <p className="mt-4 text-text-muted">Your premium smart tracking solution.</p>
-    </main>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <Hero />
+      <Features />
+      <ProductShowcase />
+      <Newsletter />
+      <Footer />
+    </div>
   );
 }
