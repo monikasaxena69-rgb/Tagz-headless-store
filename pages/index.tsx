@@ -30,7 +30,6 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function Home({ products }: HomeProps) {
   return (
     <div className="min-h-screen bg-background">
-      {/* Cache Buster: 2025-01-18-18:50 */}
       <Header />
       <Hero />
       <Features />
