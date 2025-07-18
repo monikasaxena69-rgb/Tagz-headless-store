@@ -9,7 +9,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-primary to-highlight rounded-lg"></div>
+            <img 
+              src="/logo.png" 
+              alt="Zuno Logo" 
+              className="w-6 h-6 md:w-8 md:h-8 object-contain"
+            />
             <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
               Zuno
             </span>
