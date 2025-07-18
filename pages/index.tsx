@@ -4,6 +4,18 @@ import ProductShowcase from '../components/ProductShowcase';
 import Features from '../components/Features';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
+// pages/index.tsx
+import ProductShowcase from '../components/ProductShowcase'
+import { getProducts } from '../lib/shopify'
+
+export async function getStaticProps() {
+  const products = await getProducts()
+  return { props: { products }, revalidate: 60 }
+}
+
+export default function Home({ products }) {
+  return <ProductShowcase initialProducts={products} />
+}
 
 export default function Home() {
   return (
