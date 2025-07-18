@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,11 +10,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-14 md:h-18">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img 
-              src="/logo.png" 
-              alt="Zuno Logo" 
-              className="w-24 h-24 md:w-28 md:h-28 object-contain"
-            />
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <img 
+                src="/logo.png" 
+                alt="Zuno Logo" 
+                className="w-24 h-24 md:w-28 md:h-28 object-contain cursor-pointer"
+              />
+            </Link>
             
           </div>
 

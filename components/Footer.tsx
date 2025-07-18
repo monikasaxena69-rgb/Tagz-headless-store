@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-b from-primary/10 via-background to-accent2/15 pt-8 pb-16 overflow-hidden">
@@ -13,11 +15,13 @@ export default function Footer() {
           {/* Logo and description */}
           <div className="md:col-span-1 flex flex-col items-center md:items-start">
             <div className="flex items-center justify-center md:justify-start mb-6">
-              <img 
-                src="/logo.png" 
-                alt="Zuno Logo" 
-                className="w-44 h-44 md:w-52 md:h-52 object-contain"
-              />
+              <Link href="/" className="hover:opacity-80 transition-opacity">
+                <img 
+                  src="/logo.png" 
+                  alt="Zuno Logo" 
+                  className="w-44 h-44 md:w-52 md:h-52 object-contain cursor-pointer"
+                />
+              </Link>
             </div>
             <div className="flex space-x-4 justify-center md:justify-start">
               <a href="https://www.facebook.com/tryzuno" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary/20 border border-primary/40 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-200 transform hover:scale-110">
