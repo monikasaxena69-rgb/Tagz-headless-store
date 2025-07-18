@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import { getProducts } from '../lib/shopify';
 
 interface ShopifyProduct {
@@ -34,16 +35,28 @@ export default function Footer() {
     const fetchProducts = async () => {
       try {
         const shopifyProducts = await getProducts();
-        // Take first 3 products or filter for specific products
-        setProducts(shopifyProducts.slice(0, 3));
+        console.log('Fetched products for footer:', shopifyProducts);
+        if (shopifyProducts && shopifyProducts.length > 0) {
+          // Take first 3 products
+          setProducts(shopifyProducts.slice(0, 3));
+        } else {
+                     // If no products from Shopify, use fallback
+           // Link to products section instead of individual pages that may not exist
+           setProducts([
+             { id: '1', handle: '/#products', title: 'Zuno Card' },
+             { id: '2', handle: '/#products', title: 'Zuno Key' },
+             { id: '3', handle: '/#products', title: 'Zuno Pro' }
+           ]);
+        }
       } catch (error) {
         console.error('Failed to fetch products for footer:', error);
-        // Fallback to default products if fetch fails
-        setProducts([
-          { id: '1', handle: 'zuno-card', title: 'Zuno Card' },
-          { id: '2', handle: 'zuno-key', title: 'Zuno Key' },
-          { id: '3', handle: 'zuno-pro', title: 'Zuno Pro' }
-        ]);
+                  // Fallback to default products if fetch fails
+          // Link to products section instead of individual pages that may not exist
+          setProducts([
+            { id: '1', handle: '/#products', title: 'Zuno Card' },
+            { id: '2', handle: '/#products', title: 'Zuno Key' },
+            { id: '3', handle: '/#products', title: 'Zuno Pro' }
+          ]);
       }
     };
 
@@ -152,13 +165,25 @@ export default function Footer() {
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-text-muted hover:text-highlight transition-all duration-300 hover:translate-x-1 inline-block relative group"
-                    >
-                      {link.name}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-full" />
-                    </a>
+                    {link.href.startsWith('http') ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-text-muted hover:text-highlight transition-all duration-300 hover:translate-x-1 inline-block relative group"
+                      >
+                        {link.name}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-full" />
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-text-muted hover:text-highlight transition-all duration-300 hover:translate-x-1 inline-block relative group"
+                      >
+                        {link.name}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-full" />
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
