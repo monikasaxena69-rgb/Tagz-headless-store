@@ -50,13 +50,13 @@ export default function Footer() {
         }
       } catch (error) {
         console.error('Failed to fetch products for footer:', error);
-                  // Fallback to default products if fetch fails
-          // Link to products section instead of individual pages that may not exist
-          setProducts([
-            { id: '1', handle: '/#products', title: 'Zuno Card' },
-            { id: '2', handle: '/#products', title: 'Zuno Key' },
-            { id: '3', handle: '/#products', title: 'Zuno Pro' }
-          ]);
+        // Fallback to default products if fetch fails
+        // Link to products section instead of individual pages that may not exist
+        setProducts([
+          { id: '1', handle: '/#products', title: 'Zuno Card' },
+          { id: '2', handle: '/#products', title: 'Zuno Clip' },
+          { id: '3', handle: '/#products', title: 'Zuno Pro' }
+        ]);
       }
     };
 
