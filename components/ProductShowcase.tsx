@@ -96,19 +96,16 @@ export default function ProductShowcase() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="group bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-3xl overflow-hidden hover:border-highlight/50 transition-all duration-300 transform hover:scale-105"
-            >
-              <div className="relative h-64 bg-gradient-to-br from-primary/20 to-highlight/20 flex items-center justify-center">
-                <div className="w-32 h-32 bg-gradient-to-br from-primary to-highlight rounded-2xl shadow-lg group-hover:rotate-6 transition-transform duration-300" />
-                {product.badge && (
-                  <div className="absolute top-4 right-4 bg-highlight text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {product.badge}
-                  </div>
-                )}
-              </div>
+  {filteredProducts.map((product) => (
+    <a
+      key={product.id}
+      href={`/products/${product.handle}`}
+      className="group bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-3xl overflow-hidden hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 block"
+    >
+      {/* Rest of your product card JSX */}
+    </a>
+  ))}
+</div>
 
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-text-light mb-2">{product.name}</h3>
