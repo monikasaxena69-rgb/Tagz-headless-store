@@ -1,7 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
+import { getProducts } from '../lib/shopify';
+
+interface ShopifyProduct {
+  id: string;
+  handle: string;
+  title: string;
+}
 
 export default function Footer() {
   const [isVisible, setIsVisible] = useState(false);
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const footerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -21,13 +29,35 @@ export default function Footer() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    // Fetch products for the footer links
+    const fetchProducts = async () => {
+      try {
+        const shopifyProducts = await getProducts();
+        // Take first 3 products or filter for specific products
+        setProducts(shopifyProducts.slice(0, 3));
+      } catch (error) {
+        console.error('Failed to fetch products for footer:', error);
+        // Fallback to default products if fetch fails
+        setProducts([
+          { id: '1', handle: 'zuno-card', title: 'Zuno Card' },
+          { id: '2', handle: 'zuno-key', title: 'Zuno Key' },
+          { id: '3', handle: 'zuno-pro', title: 'Zuno Pro' }
+        ]);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   const footerSections = [
     {
       title: "Product",
       links: [
-        { name: "Zuno Card", href: "/products/zuno-card" },
-        { name: "Zuno Key", href: "/products/zuno-key" },
-        { name: "Zuno Pro", href: "/products/zuno-pro" },
+        ...products.map(product => ({
+          name: product.title,
+          href: `/products/${product.handle}`
+        })),
         { name: "Compare All", href: "/compare" }
       ]
     },
