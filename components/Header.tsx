@@ -4,44 +4,55 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-text-muted/20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-text-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-highlight rounded-lg"></div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
+            <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-primary to-highlight rounded-lg"></div>
+            <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
               Zuno
             </span>
           </div>
 
-          {/* Navigation */}
-          // components/Header.tsx (nav part)
-<nav>
-  <ul className="flex space-x-8">
-    {['Features','Products','Support'].map((item) => (
-      <li key={item}>
-        <Link href={`#${item.toLowerCase()}`}>
-          <a className="text-text-light hover:text-highlight transition-colors">
-            {item}
-          </a>
-        </Link>
-      </li>
-    ))}
-  </ul>
-</nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <a href="#features" className="text-text-muted hover:text-highlight transition-colors text-sm">Features</a>
+            <a href="#products" className="text-text-muted hover:text-highlight transition-colors text-sm">Products</a>
+            <a href="#support" className="text-text-muted hover:text-highlight transition-colors text-sm">Support</a>
+          </nav>
 
-
-          {/* Cart and Menu */}
-          <div className="flex items-center space-x-4">
-            <button className="text-text-muted hover:text-highlight transition-colors">
+          {/* Cart and Mobile Menu */}
+          <div className="flex items-center space-x-3 md:space-x-4">
+            <button className="text-text-muted hover:text-highlight transition-colors text-sm">
               🛒 <span className="ml-1">0</span>
             </button>
-            <button className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
+            <button className="bg-primary hover:bg-primary/80 text-white px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold transition-colors">
               Shop Now
+            </button>
+            
+            {/* Mobile menu button */}
+            <button 
+              className="md:hidden text-text-muted hover:text-highlight"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
             </button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-text-muted/20">
+            <nav className="flex flex-col space-y-3">
+              <a href="#features" className="text-text-muted hover:text-highlight transition-colors text-sm">Features</a>
+              <a href="#products" className="text-text-muted hover:text-highlight transition-colors text-sm">Products</a>
+              <a href="#support" className="text-text-muted hover:text-highlight transition-colors text-sm">Support</a>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );
