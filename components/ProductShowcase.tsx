@@ -1,74 +1,83 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getProducts } from '../lib/shopify';
+
+interface ShopifyProduct {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  featuredImage?: {
+    url: string;
+    altText: string;
+  };
+  variants: {
+    edges: Array<{
+      node: {
+        price: {
+          amount: string;
+          currencyCode: string;
+        };
+        compareAtPrice?: {
+          amount: string;
+          currencyCode: string;
+        };
+      };
+    }>;
+  };
+  tags: string[];
+  productType: string;
+}
 
 export default function ProductShowcase() {
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const products = [
-    {
-      id: 1,
-      name: "Zuno Card",
-      price: "$29",
-      originalPrice: "$39",
-      category: "cards",
-      badge: "Best Seller",
-      description: "Ultra-thin smart tracker the size of a credit card",
-      handle: "zuno-card"
-    },
-    {
-      id: 2,
-      name: "Zuno Key",
-      price: "$39",
-      category: "keys",
-      badge: "New",
-      description: "Perfect tracker for your keychain",
-      handle: "zuno-key"
-    },
-    {
-      id: 3,
-      name: "Zuno Pro",
-      price: "$49",
-      category: "cards",
-      badge: "Premium",
-      description: "Professional grade tracker with advanced features",
-      handle: "zuno-pro"
-    },
-    {
-      id: 4,
-      name: "Charging Pad",
-      price: "$19",
-      category: "accessories",
-      description: "Wireless charging station for your Zuno devices",
-      handle: "charging-pad"
-    },
-    {
-      id: 5,
-      name: "Protective Case",
-      price: "$12",
-      category: "accessories",
-      description: "Durable silicone case for extra protection",
-      handle: "protective-case"
-    },
-    {
-      id: 6,
-      name: "Zuno Sticker",
-      price: "$24",
-      category: "cards",
-      badge: "New",
-      description: "Adhesive tracker that sticks to any surface",
-      handle: "zuno-sticker"
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const shopifyProducts = await getProducts();
+        setProducts(shopifyProducts);
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
+      }
     }
-  ];
+
+    fetchProducts();
+  }, []);
 
   const categories = [
     { id: 'all', name: 'All Products', icon: '🎯' },
-    { id: 'cards', name: 'Cards', icon: '💳' },
-    { id: 'keys', name: 'Keys', icon: '🔑' },
-    { id: 'accessories', name: 'Accessories', icon: '⚡' }
+    { id: 'tracker', name: 'Trackers', icon: '📍' },
+    { id: 'accessory', name: 'Accessories', icon: '⚡' },
   ];
 
   const filteredProducts = activeCategory === 'all' 
     ? products 
-    : products.filter(product => product.category === activeCategory);
+    : products.filter(product => 
+        product.productType.toLowerCase() === activeCategory || 
+        product.tags.some(tag => tag.toLowerCase().includes(activeCategory))
+      );
+
+  if (loading) {
+    return (
+      <section className="py-20 px-4 bg-background">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="animate-pulse">
+            <div className="h-8 bg-text-muted/20 rounded w-64 mx-auto mb-4"></div>
+            <div className="h-4 bg-text-muted/20 rounded w-96 mx-auto mb-12"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="bg-text-muted/10 rounded-3xl h-96"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
@@ -102,40 +111,68 @@ export default function ProductShowcase() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <a
-              key={product.id}
-              href={`/products/${product.handle}`}
-              className="group bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-3xl overflow-hidden hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 block"
-            >
-              <div className="relative h-64 bg-gradient-to-br from-primary/20 to-highlight/20 flex items-center justify-center">
-                <div className="w-32 h-32 bg-gradient-to-br from-primary to-highlight rounded-2xl shadow-lg group-hover:rotate-6 transition-transform duration-300" />
-                {product.badge && (
-                  <div className="absolute top-4 right-4 bg-highlight text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {product.badge}
-                  </div>
-                )}
-              </div>
+          {filteredProducts.map((product) => {
+            const mainVariant = product.variants.edges[0]?.node;
+            const price = mainVariant?.price.amount;
+            const compareAtPrice = mainVariant?.compareAtPrice?.amount;
+            const currencyCode = mainVariant?.price.currencyCode || 'USD';
 
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-text-light mb-2">{product.name}</h3>
-                <p className="text-text-muted text-sm mb-4">{product.description}</p>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-2xl font-bold text-highlight">{product.price}</span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-text-muted line-through">{product.originalPrice}</span>
-                    )}
-                  </div>
-                  <div className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200">
-                    View Details
+            return (
+              <a
+                key={product.id}
+                href={`/products/${product.handle}`}
+                className="group bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-3xl overflow-hidden hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 block"
+              >
+                <div className="relative h-64 bg-gradient-to-br from-primary/20 to-highlight/20 flex items-center justify-center overflow-hidden">
+                  {product.featuredImage ? (
+                    <img
+                      src={product.featuredImage.url}
+                      alt={product.featuredImage.altText || product.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="w-32 h-32 bg-gradient-to-br from-primary to-highlight rounded-2xl shadow-lg group-hover:rotate-6 transition-transform duration-300" />
+                  )}
+                  
+                  {compareAtPrice && (
+                    <div className="absolute top-4 right-4 bg-highlight text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      Sale
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-text-light mb-2">{product.title}</h3>
+                  <p className="text-text-muted text-sm mb-4 line-clamp-2">
+                    {product.description || 'Premium tracking device'}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-2xl font-bold text-highlight">
+                        ${parseFloat(price || '0').toFixed(2)}
+                      </span>
+                      {compareAtPrice && (
+                        <span className="text-sm text-text-muted line-through">
+                          ${parseFloat(compareAtPrice).toFixed(2)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200">
+                      View Details
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
+
+        {filteredProducts.length === 0 && !loading && (
+          <div className="text-center py-12">
+            <p className="text-text-muted text-lg">No products found in this category.</p>
+          </div>
+        )}
       </div>
     </section>
   );
