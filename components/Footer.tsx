@@ -1,103 +1,200 @@
-import Link from 'next/link';
+import { useState, useRef, useEffect } from 'react';
 
 export default function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const footerSections = [
+    {
+      title: "Product",
+      links: [
+        { name: "Zuno Card", href: "/products/zuno-card" },
+        { name: "Zuno Key", href: "/products/zuno-key" },
+        { name: "Zuno Pro", href: "/products/zuno-pro" },
+        { name: "Compare All", href: "/compare" }
+      ]
+    },
+    {
+      title: "Support",
+      links: [
+        { name: "Help Center", href: "/help" },
+        { name: "Contact Us", href: "/contact" },
+        { name: "Warranty", href: "/warranty" },
+        { name: "Returns", href: "/returns" }
+      ]
+    },
+    {
+      title: "Company",
+      links: [
+        { name: "About Us", href: "/about" },
+        { name: "Careers", href: "/careers" },
+        { name: "Press", href: "/press" },
+        { name: "Blog", href: "/blog" }
+      ]
+    }
+  ];
+
+  const socialLinks = [
+    { name: "Instagram", icon: "📷", href: "https://instagram.com/tryzuno", color: "hover:text-pink-400" },
+    { name: "Twitter", icon: "🐦", href: "https://twitter.com/try_zuno", color: "hover:text-blue-400" },
+    { name: "Facebook", icon: "📘", href: "https://facebook.com/tryzuno", color: "hover:text-blue-600" },
+    { name: "LinkedIn", icon: "💼", href: "https://linkedin.com/company/zuno", color: "hover:text-blue-500" }
+  ];
+
   return (
-    <footer className="relative bg-gradient-to-b from-primary/10 via-background to-accent2/15 pt-8 pb-16 overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-primary/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-highlight/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent1/10 rounded-full blur-3xl" />
+    <footer 
+      ref={footerRef}
+      className="bg-gradient-to-br from-background via-primary/5 to-accent1/10 border-t border-primary/20 relative overflow-hidden"
+    >
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-highlight/5 rounded-full blur-3xl animate-float-reverse" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start">
-          {/* Logo and description */}
-          <div className="md:col-span-1 flex flex-col items-center md:items-start">
-            <div className="flex items-center justify-center md:justify-start mb-6">
-              <Link href="/" className="hover:opacity-80 transition-opacity">
-                <img 
-                  src="/logo.png" 
-                  alt="Zuno Logo" 
-                  className="w-44 h-44 md:w-52 md:h-52 object-contain cursor-pointer"
-                />
-              </Link>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+          {/* Company Info */}
+          <div className={`lg:col-span-2 transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          }`}>
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-highlight rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-lg">Z</span>
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
+                Zuno
+              </span>
             </div>
-            <div className="flex space-x-4 justify-center md:justify-start">
-              <a href="https://www.facebook.com/tryzuno" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary/20 border border-primary/40 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-200 transform hover:scale-110">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-              <a href="https://www.instagram.com/tryzuno" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-accent1/20 border border-accent1/40 rounded-full flex items-center justify-center text-accent1 hover:bg-accent1 hover:text-white transition-all duration-200 transform hover:scale-110">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-              <a href="https://twitter.com/try_zuno" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-highlight/20 border border-highlight/40 rounded-full flex items-center justify-center text-highlight hover:bg-highlight hover:text-black transition-all duration-200 transform hover:scale-110">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.80l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
+            <p className="text-text-muted mb-6 max-w-md leading-relaxed">
+              Smart tracking technology that adapts to your lifestyle. Never lose anything again with our revolutionary tracking devices.
+            </p>
+            
+            {/* Social Links */}
+            <div className="flex space-x-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-10 h-10 bg-background/50 backdrop-blur-sm border border-primary/20 rounded-full flex items-center justify-center text-text-muted transition-all duration-300 transform hover:scale-110 hover:border-highlight/50 ${social.color} group`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <span className="text-lg group-hover:scale-110 transition-transform duration-300">
+                    {social.icon}
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Products */}
-          <div className="bg-background/30 backdrop-blur-sm p-6 rounded-2xl border border-primary/20">
-            <h3 className="text-text-light font-semibold mb-4 bg-gradient-to-r from-primary to-accent1 bg-clip-text text-transparent">Products</h3>
-            <ul className="space-y-3 text-sm">
-              {['Zuno Card', 'Zuno Clip', 'Zuno Jet', 'Zuno Pet', 'Zuno Pro'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-text-muted hover:text-highlight transition-colors duration-200 flex items-center space-x-2 p-2 rounded-lg hover:bg-highlight/10">
-                    <span className="w-2 h-2 bg-primary rounded-full"></span>
-                    <span>{item}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Footer Links */}
+          {footerSections.map((section, sectionIndex) => (
+            <div 
+              key={section.title}
+              className={`transition-all duration-1000 ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+              }`}
+              style={{ transitionDelay: `${(sectionIndex + 1) * 200}ms` }}
+            >
+              <h3 className="text-text-light font-semibold mb-4 text-lg">
+                {section.title}
+              </h3>
+              <ul className="space-y-3">
+                {section.links.map((link, linkIndex) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-text-muted hover:text-highlight transition-all duration-300 hover:translate-x-1 inline-block relative group"
+                    >
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-highlight transition-all duration-300 group-hover:w-full" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-          {/* Support */}
-          <div className="bg-background/30 backdrop-blur-sm p-6 rounded-2xl border border-accent1/20">
-            <h3 className="text-text-light font-semibold mb-4 bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Support</h3>
-            <ul className="space-y-3 text-sm">
-              {['Help Center','Contact Us','Warranty','Returns'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase().replace(/ /g, '-')}`}
-                    className="text-text-muted hover:text-highlight transition-colors duration-200 flex items-center space-x-2 p-2 rounded-lg hover:bg-highlight/10"
-                  >
-                    <span className="w-2 h-2 bg-accent1 rounded-full"></span>
-                    <span>{item}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div className="bg-background/30 backdrop-blur-sm p-6 rounded-2xl border border-highlight/20">
-            <h3 className="text-text-light font-semibold mb-4 bg-gradient-to-r from-accent2 to-highlight bg-clip-text text-transparent">Company</h3>
-            <ul className="space-y-3 text-sm">
-              {['About Us','Careers','Privacy','Terms'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase().replace(/ /g, '-')}`}
-                    className="text-text-muted hover:text-highlight transition-colors duration-200 flex items-center space-x-2 p-2 rounded-lg hover:bg-highlight/10"
-                  >
-                    <span className="w-2 h-2 bg-highlight rounded-full"></span>
-                    <span>{item}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+        {/* Newsletter Signup */}
+        <div className={`bg-gradient-to-r from-primary/10 via-accent1/10 to-highlight/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6 mb-12 transition-all duration-1000 delay-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-semibold text-text-light mb-2">
+                Stay in the loop
+              </h3>
+              <p className="text-text-muted">
+                Get updates on new products and exclusive offers.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 min-w-0 md:min-w-[300px]">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="flex-1 px-4 py-2 bg-background/50 backdrop-blur-sm border border-text-muted/30 rounded-full text-text-light placeholder-text-muted focus:outline-none focus:border-highlight focus:ring-2 focus:ring-highlight/20 transition-all duration-300"
+              />
+              <button className="px-6 py-2 bg-primary hover:bg-primary/80 text-white rounded-full font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-primary/30 whitespace-nowrap">
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-primary/30 pt-8 text-center bg-background/20 backdrop-blur-sm rounded-2xl p-6">
-          <p className="text-text-muted text-sm">
-            © {new Date().getFullYear()} Zuno Technologies. All rights reserved. Made with <span className="text-highlight">❤️</span> for peace of mind.
-          </p>
+        {/* Bottom Bar */}
+        <div className={`border-t border-primary/20 pt-8 transition-all duration-1000 delay-1200 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-sm text-text-muted">
+              <span>© 2024 Zuno Technologies. All rights reserved.</span>
+              <div className="flex space-x-4">
+                <a href="/privacy" className="hover:text-highlight transition-colors duration-300">
+                  Privacy Policy
+                </a>
+                <a href="/terms" className="hover:text-highlight transition-colors duration-300">
+                  Terms of Service
+                </a>
+                <a href="/cookies" className="hover:text-highlight transition-colors duration-300">
+                  Cookies
+                </a>
+              </div>
+            </div>
+            
+            {/* Back to top button */}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center space-x-2 text-text-muted hover:text-highlight transition-all duration-300 transform hover:scale-105 group"
+            >
+              <span className="text-sm">Back to top</span>
+              <div className="w-8 h-8 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center group-hover:bg-primary/30 group-hover:border-highlight/50 transition-all duration-300">
+                <span className="text-xs transform group-hover:-translate-y-0.5 transition-transform duration-300">
+                  ↑
+                </span>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </footer>
