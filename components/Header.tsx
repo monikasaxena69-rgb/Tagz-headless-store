@@ -10,7 +10,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <img 
-              src="/logo.png" 
+              src="/Logo.png" 
               alt="Zuno Logo" 
               className="w-6 h-6 md:w-8 md:h-8 object-contain"
             />
