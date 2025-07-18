@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom global styles */
-body {
-  background-color: theme('colors.background');
-  color: theme('colors.text-light');
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #0B0D17;
+    color: #F8FAFC;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent;
+  }
 }
