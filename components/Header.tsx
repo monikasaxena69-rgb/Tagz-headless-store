@@ -16,11 +16,21 @@ export default function Header() {
           </div>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-text-muted hover:text-highlight transition-colors">Features</a>
-            <a href="#products" className="text-text-muted hover:text-highlight transition-colors">Products</a>
-            <a href="#support" className="text-text-muted hover:text-highlight transition-colors">Support</a>
-          </nav>
+          // components/Header.tsx (nav part)
+<nav>
+  <ul className="flex space-x-8">
+    {['Features','Products','Support'].map((item) => (
+      <li key={item}>
+        <Link href={`#${item.toLowerCase()}`}>
+          <a className="text-text-light hover:text-highlight transition-colors">
+            {item}
+          </a>
+        </Link>
+      </li>
+    ))}
+  </ul>
+</nav>
+
 
           {/* Cart and Menu */}
           <div className="flex items-center space-x-4">
