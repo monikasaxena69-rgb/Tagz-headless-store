@@ -18,7 +18,11 @@ module.exports = {
       animation: {
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'bounce': 'bounce 1s infinite',
-      }
+        'spin-slow': 'spin 3s linear infinite',
+      },
+      screens: {
+        'xs': '475px',
+      },
     },
   },
   plugins: [],
