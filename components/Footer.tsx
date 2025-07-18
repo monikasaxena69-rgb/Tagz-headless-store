@@ -9,11 +9,8 @@ export default function Footer() {
               <img 
                 src="/logo.png" 
                 alt="Zuno Logo" 
-                className="w-8 h-8 object-contain"
+                className="w-12 h-12 object-contain"
               />
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
-                Zuno
-              </span>
             </div>
             <p className="text-text-muted text-sm mb-4">
               Never lose anything again with our smart tracking technology.
