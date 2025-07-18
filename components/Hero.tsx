@@ -9,21 +9,21 @@ export default function Hero() {
       subtitle: "Smart tracking technology that adapts to your lifestyle",
       cta: "Shop Trackers",
       highlight: "New Release",
-      bg: "from-primary/20 to-accent1/20"
+      bg: "from-primary/40 via-accent1/30 to-highlight/40"
     },
     {
       title: "Ultra-Precision Location",
       subtitle: "Find your items within inches, anywhere in the world",
       cta: "Explore Technology", 
       highlight: "Advanced GPS",
-      bg: "from-accent2/20 to-highlight/20"
+      bg: "from-accent2/40 via-primary/30 to-highlight/50"
     },
     {
       title: "30-Day Battery Life",
       subtitle: "Worry-free tracking with our revolutionary power system",
       cta: "Learn More",
       highlight: "Long Lasting",
-      bg: "from-highlight/20 to-primary/20"
+      bg: "from-highlight/50 via-accent1/30 to-primary/40"
     }
   ];
 
@@ -39,12 +39,14 @@ export default function Hero() {
       <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].bg} transition-all duration-1000`} />
       
       <div className="absolute inset-0">
-        <div className="absolute top-10 left-5 md:top-20 md:left-10 w-32 h-32 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 right-5 md:bottom-20 md:right-10 w-48 h-48 md:w-96 md:h-96 bg-highlight/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-10 left-5 md:top-20 md:left-10 w-32 h-32 md:w-64 md:h-64 bg-primary/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-10 right-5 md:bottom-20 md:right-10 w-48 h-48 md:w-96 md:h-96 bg-highlight/35 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/3 w-40 h-40 md:w-80 md:h-80 bg-accent1/25 rounded-full blur-3xl animate-pulse delay-500" />
+        <div className="absolute bottom-1/3 right-1/4 w-36 h-36 md:w-72 md:h-72 bg-accent2/30 rounded-full blur-3xl animate-pulse delay-1500" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center px-3 py-2 md:px-4 md:py-2 rounded-full bg-highlight/20 text-highlight font-semibold text-xs md:text-sm mb-6 animate-bounce">
+        <div className="inline-flex items-center px-3 py-2 md:px-4 md:py-2 rounded-full bg-highlight/40 border border-highlight/60 text-highlight font-semibold text-xs md:text-sm mb-6 animate-bounce shadow-lg shadow-highlight/20">
           <span className="mr-2">✨</span>
           {slides[currentSlide].highlight}
         </div>
@@ -74,9 +76,9 @@ export default function Hero() {
             { name: "Zuno Key", price: "$39", feature: "Keychain friendly" },
             { name: "Zuno Pro", price: "$49", feature: "Premium materials" }
           ].map((product, index) => (
-            <div key={product.name} className="bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-2xl p-4 md:p-6 hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 group">
-              <div className="w-full h-24 md:h-32 bg-gradient-to-br from-primary/20 to-highlight/20 rounded-lg mb-4 flex items-center justify-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-primary to-highlight rounded-lg shadow-lg group-hover:rotate-12 transition-transform duration-300" />
+            <div key={product.name} className="bg-background/70 backdrop-blur-md border border-primary/30 rounded-2xl p-4 md:p-6 hover:border-highlight/70 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 group">
+              <div className="w-full h-24 md:h-32 bg-gradient-to-br from-primary/40 via-accent1/30 to-highlight/40 rounded-lg mb-4 flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-primary via-accent2 to-highlight rounded-lg shadow-xl group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
               </div>
               <h3 className="text-base md:text-lg font-semibold text-text-light mb-2">{product.name}</h3>
               <p className="text-text-muted text-xs md:text-sm mb-3">{product.feature}</p>

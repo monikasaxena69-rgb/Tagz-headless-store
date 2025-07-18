@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getProducts } from '../lib/shopify';
+import { getProducts, getShopifyProductUrl } from '../lib/shopify';
 
 interface ShopifyProduct {
   id: string;
@@ -89,7 +89,7 @@ export default function ProductShowcase({ initialProducts = [] }: ProductShowcas
   }
 
   return (
-    <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-accent1/5 via-background to-primary/10">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-text-light mb-6">
@@ -130,9 +130,9 @@ export default function ProductShowcase({ initialProducts = [] }: ProductShowcas
               <a
                 key={product.id}
                 href={`/products/${product.handle}`}
-                className="group bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-3xl overflow-hidden hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 block"
+                className="group bg-background/70 backdrop-blur-md border border-primary/30 rounded-3xl overflow-hidden hover:border-highlight/70 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 block"
               >
-                <div className="relative h-64 bg-gradient-to-br from-primary/20 to-highlight/20 flex items-center justify-center overflow-hidden">
+                                  <div className="relative h-64 bg-gradient-to-br from-primary/40 via-accent1/30 to-highlight/40 flex items-center justify-center overflow-hidden">
                   {product.featuredImage ? (
                     <img
                       src={product.featuredImage.url}
@@ -156,7 +156,7 @@ export default function ProductShowcase({ initialProducts = [] }: ProductShowcas
                     {product.description || 'Premium tracking device'}
                   </p>
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
                       <span className="text-2xl font-bold text-highlight">
                         ${parseFloat(price || '0').toFixed(2)}
@@ -167,9 +167,25 @@ export default function ProductShowcase({ initialProducts = [] }: ProductShowcas
                         </span>
                       )}
                     </div>
-                    <div className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200">
+                  </div>
+                  
+                  <div className="flex space-x-2">
+                    <a 
+                      href={`/products/${product.handle}`}
+                      className="flex-1 bg-text-muted/10 hover:bg-primary text-text-light hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200 text-center"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       View Details
-                    </div>
+                    </a>
+                    <a
+                      href={getShopifyProductUrl(product.handle)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200 text-center"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Buy Now
+                    </a>
                   </div>
                 </div>
               </a>

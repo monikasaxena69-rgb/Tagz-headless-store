@@ -1,0 +1,13 @@
+{
+  "build": {
+    "env": {
+      "SHOPIFY_STORE_DOMAIN": "@shopify_store_domain",
+      "SHOPIFY_STOREFRONT_ACCESS_TOKEN": "@shopify_storefront_access_token"
+    }
+  },
+  "functions": {
+    "pages/api/**/*.js": {
+      "maxDuration": 30
+    }
+  }
+}
