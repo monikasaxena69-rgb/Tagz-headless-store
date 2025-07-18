@@ -8,6 +8,16 @@ const client = new GraphQLClient(endpoint, {
   }
 })
 
+// Helper function to get the Shopify store URL
+export function getShopifyStoreUrl(): string {
+  return `https://${process.env.SHOPIFY_STORE_DOMAIN}`;
+}
+
+// Helper function to get direct Shopify product URL
+export function getShopifyProductUrl(handle: string): string {
+  return `${getShopifyStoreUrl()}/products/${handle}`;
+}
+
 interface ShopifyProduct {
   id: string;
   handle: string;
