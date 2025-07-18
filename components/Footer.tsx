@@ -13,7 +13,6 @@ export default function Footer() {
               />
             </div>
             <p className="text-text-muted text-sm mb-4">
-              Track What Matters. Track With Zuno.
             </p>
             <div className="flex space-x-3">
               <a href="#" className="text-text-muted hover:text-highlight transition-colors">📘</a>
