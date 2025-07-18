@@ -14,9 +14,7 @@ export default function Header() {
               alt="Zuno Logo" 
               className="w-6 h-6 md:w-8 md:h-8 object-contain"
             />
-            <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
-              Zuno
-            </span>
+            
           </div>
 
           {/* Desktop Navigation */}
