@@ -78,7 +78,7 @@ export default function Newsletter() {
               </div>
               <button
                 type="submit"
-                className="px-8 py-4 bg-primary hover:bg-primary/80 text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-primary/30 group relative overflow-hidden"
+                className="px-6 py-3 bg-primary hover:bg-primary/80 text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-primary/30 group relative overflow-hidden"
               >
                 <span className="relative z-10">Subscribe</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
