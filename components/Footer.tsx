@@ -27,9 +27,10 @@ export default function Footer() {
             <h3 className="text-text-light font-semibold mb-4">Products</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Card</a></li>
-              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Key</a></li>
+              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Clip</a></li>
+              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Jet</a></li>
+              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Pet</a></li>
               <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Zuno Pro</a></li>
-              <li><a href="#" className="text-text-muted hover:text-highlight transition-colors">Accessories</a></li>
             </ul>
           </div>
 
@@ -70,7 +71,7 @@ export default function Footer() {
 
         <div className="border-t border-text-muted/20 pt-8 text-center">
           <p className="text-text-muted text-sm">
-            © {new Date().getFullYear()} Zuno Labs. All rights reserved. Made with ❤️ for peace of mind.
+            © {new Date().getFullYear()} Zuno Technologies. All rights reserved. Made with ❤️ for peace of mind.
           </p>
         </div>
       </div>
