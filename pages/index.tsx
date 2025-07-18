@@ -1,29 +1,39 @@
+import { GetStaticProps } from 'next';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import ProductShowcase from '../components/ProductShowcase';
 import Features from '../components/Features';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-// pages/index.tsx
-import ProductShowcase from '../components/ProductShowcase'
-import { getProducts } from '../lib/shopify'
+import { getProducts } from '../lib/shopify';
 
-export async function getStaticProps() {
-  const products = await getProducts()
-  return { props: { products }, revalidate: 60 }
+interface HomeProps {
+  products: any[];
 }
 
-export default function Home({ products }) {
-  return <ProductShowcase initialProducts={products} />
-}
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const products = await getProducts();
+    return { 
+      props: { products }, 
+      revalidate: 60 // Revalidate every minute
+    };
+  } catch (error) {
+    console.error('Error fetching products in getStaticProps:', error);
+    return {
+      props: { products: [] },
+      revalidate: 60
+    };
+  }
+};
 
-export default function Home() {
+export default function Home({ products }: HomeProps) {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <Hero />
       <Features />
-      <ProductShowcase />
+      <ProductShowcase initialProducts={products} />
       <Newsletter />
       <Footer />
     </div>

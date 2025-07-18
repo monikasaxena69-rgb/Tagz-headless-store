@@ -8,7 +8,58 @@ const client = new GraphQLClient(endpoint, {
   }
 })
 
-export async function getProducts() {
+interface ShopifyProduct {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  descriptionHtml: string;
+  productType: string;
+  tags: string[];
+  featuredImage?: {
+    url: string;
+    altText: string;
+  };
+  images: {
+    edges: Array<{
+      node: {
+        url: string;
+        altText: string;
+      };
+    }>;
+  };
+  variants: {
+    edges: Array<{
+      node: {
+        id: string;
+        title: string;
+        price: {
+          amount: string;
+          currencyCode: string;
+        };
+        compareAtPrice?: {
+          amount: string;
+          currencyCode: string;
+        };
+        availableForSale: boolean;
+      };
+    }>;
+  };
+}
+
+interface ShopifyProductsResponse {
+  products: {
+    edges: Array<{
+      node: ShopifyProduct;
+    }>;
+  };
+}
+
+interface ShopifyProductResponse {
+  productByHandle: ShopifyProduct;
+}
+
+export async function getProducts(): Promise<ShopifyProduct[]> {
   const query = gql`
     query {
       products(first: 20) {
@@ -18,14 +69,35 @@ export async function getProducts() {
             handle
             title
             description
+            descriptionHtml
             productType
             tags
-            featuredImage { url altText }
-            variants(first: 1) {
+            featuredImage { 
+              url 
+              altText 
+            }
+            images(first: 10) {
               edges {
                 node {
-                  price { amount currencyCode }
-                  compareAtPrice { amount currencyCode }
+                  url
+                  altText
+                }
+              }
+            }
+            variants(first: 10) {
+              edges {
+                node {
+                  id
+                  title
+                  price { 
+                    amount 
+                    currencyCode 
+                  }
+                  compareAtPrice { 
+                    amount 
+                    currencyCode 
+                  }
+                  availableForSale
                 }
               }
             }
@@ -34,6 +106,65 @@ export async function getProducts() {
       }
     }
   `
-  const { products } = await client.request<{ products: any }>(query)
-  return products.edges.map(edge => edge.node)
+  
+  try {
+    const { products } = await client.request<ShopifyProductsResponse>(query)
+    return products.edges.map((edge) => edge.node)
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    return []
+  }
+}
+
+export async function getProduct(handle: string): Promise<ShopifyProduct | null> {
+  const query = gql`
+    query getProduct($handle: String!) {
+      productByHandle(handle: $handle) {
+        id
+        handle
+        title
+        description
+        descriptionHtml
+        productType
+        tags
+        featuredImage { 
+          url 
+          altText 
+        }
+        images(first: 10) {
+          edges {
+            node {
+              url
+              altText
+            }
+          }
+        }
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              title
+              price { 
+                amount 
+                currencyCode 
+              }
+              compareAtPrice { 
+                amount 
+                currencyCode 
+              }
+              availableForSale
+            }
+          }
+        }
+      }
+    }
+  `
+  
+  try {
+    const { productByHandle } = await client.request<ShopifyProductResponse>(query, { handle })
+    return productByHandle
+  } catch (error) {
+    console.error('Error fetching product:', error)
+    return null
+  }
 }

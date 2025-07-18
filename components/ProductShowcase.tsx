@@ -28,25 +28,34 @@ interface ShopifyProduct {
   productType: string;
 }
 
-export default function ProductShowcase() {
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+interface ProductShowcaseProps {
+  initialProducts?: ShopifyProduct[];
+}
+
+export default function ProductShowcase({ initialProducts = [] }: ProductShowcaseProps) {
+  const [products, setProducts] = useState<ShopifyProduct[]>(initialProducts);
+  const [loading, setLoading] = useState(!initialProducts.length);
   const [activeCategory, setActiveCategory] = useState('all');
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const shopifyProducts = await getProducts();
-        setProducts(shopifyProducts);
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
+    // Only fetch products if we don't have initial products
+    if (!initialProducts.length) {
+      const fetchProducts = async () => {
+        try {
+          const shopifyProducts = await getProducts();
+          setProducts(shopifyProducts);
+        } catch (error) {
+          console.error('Failed to fetch products:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    fetchProducts();
-  }, []);
+      fetchProducts();
+    } else {
+      setLoading(false);
+    }
+  }, [initialProducts.length]);
 
   const categories = [
     { id: 'all', name: 'All Products', icon: '🎯' },
