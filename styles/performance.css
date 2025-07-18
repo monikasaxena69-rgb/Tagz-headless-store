@@ -1,0 +1,105 @@
+/* Performance Optimizations for Animations */
+
+/* Hardware acceleration for transform animations */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Optimize common animation properties */
+.animate-optimized {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Keep essential animations but make them faster */
+  .essential-animation {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* Optimize blur effects */
+.backdrop-blur-optimized {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* GPU-accelerated opacity changes */
+.opacity-gpu {
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+/* Optimize gradient animations */
+.gradient-optimized {
+  background-attachment: fixed;
+  will-change: background-position;
+}
+
+/* Performance-friendly hover states */
+.hover-optimized {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity, box-shadow;
+}
+
+.hover-optimized:hover {
+  transform: translateY(-2px) translateZ(0);
+}
+
+/* Optimize intersection observer animations */
+.observe-optimized {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* Particle system optimizations */
+.particle-optimized {
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Loading state optimizations */
+.loading-optimized {
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+}
+
+/* Memory efficient animations */
+.memory-efficient {
+  contain: layout style paint;
+}
+
+/* Container queries support for responsive animations */
+@container (min-width: 768px) {
+  .container-responsive {
+    animation-duration: 0.8s;
+  }
+}
+
+@container (max-width: 767px) {
+  .container-responsive {
+    animation-duration: 0.5s;
+  }
+}

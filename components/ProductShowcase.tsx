@@ -172,7 +172,7 @@ export default function ProductShowcase({ initialProducts = [] }: ProductShowcas
             return (
               <a
                 key={product.id}
-                ref={el => productRefs.current[index] = el}
+                ref={el => { productRefs.current[index] = el; }}
                 href={`/products/${product.handle}`}
                 className={`group bg-background/70 backdrop-blur-md border border-primary/30 rounded-3xl overflow-hidden hover:border-highlight/70 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-700 transform block relative ${
                   visibleProducts[index] 

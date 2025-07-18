@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './performance.css';
 
 @layer base {
   html {
@@ -10,12 +11,31 @@
   body {
     background-color: #0B0D17;
     color: #F8FAFC;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optimize all images */
+  img {
+    content-visibility: auto;
   }
 }
 
 @layer utilities {
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent;
+  }
+
+  /* Hardware acceleration utilities */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -187,4 +207,23 @@
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200px 100%;
   animation: skeleton 1.5s infinite;
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    animation-duration: 0.5s !important;
+    transition-duration: 0.3s !important;
+  }
+  
+  .particle-optimized {
+    display: none; /* Hide particles on mobile for better performance */
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+  }
 }

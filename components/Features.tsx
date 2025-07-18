@@ -90,7 +90,7 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              ref={el => featureRefs.current[index] = el}
+              ref={el => { featureRefs.current[index] = el; }}
               className={`relative p-6 bg-gradient-to-br ${featureColors[index]} backdrop-blur-sm border border-primary/20 rounded-2xl hover:border-highlight/60 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 transform group overflow-hidden ${
                 visibleFeatures[index] 
                   ? 'translate-y-0 opacity-100 scale-100' 
