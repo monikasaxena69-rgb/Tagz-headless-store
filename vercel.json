@@ -1,5 +1,4 @@
 {
-  "_comment": "Auto-deployment test",
   "build": {
     "env": {
       "SHOPIFY_STORE_DOMAIN": "@shopify_store_domain",
