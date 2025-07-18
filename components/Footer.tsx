@@ -19,14 +19,6 @@ export default function Footer() {
                 className="w-44 h-44 md:w-52 md:h-52 object-contain"
               />
             </div>
-<<<<<<< HEAD
-            <p className="text-text-muted text-sm mb-4">
-            </p>
-            <div className="flex space-x-3">
-              <a href="#" className="text-text-muted hover:text-highlight transition-colors">📘</a>
-              <a href="#" className="text-text-muted hover:text-highlight transition-colors">📷</a>
-              <a href="#" className="text-text-muted hover:text-highlight transition-colors">🐦</a>
-=======
             <div className="flex space-x-4 justify-center md:justify-start">
               <a href="https://www.facebook.com/tryzuno" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary/20 border border-primary/40 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-200 transform hover:scale-110">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -40,10 +32,9 @@ export default function Footer() {
               </a>
               <a href="https://twitter.com/try_zuno" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-highlight/20 border border-highlight/40 rounded-full flex items-center justify-center text-highlight hover:bg-highlight hover:text-black transition-all duration-200 transform hover:scale-110">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.80l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
->>>>>>> cursor/adjust-header-styling-c01e
             </div>
           </div>
 
