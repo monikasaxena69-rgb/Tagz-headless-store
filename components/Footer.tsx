@@ -120,10 +120,10 @@ export default function Footer() {
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}>
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-highlight rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">Z</span>
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-highlight rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-base">Z</span>
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-primary to-highlight bg-clip-text text-transparent">
                 Zuno
               </span>
             </div>
