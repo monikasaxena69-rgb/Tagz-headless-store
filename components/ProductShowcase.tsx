@@ -11,7 +11,8 @@ export default function ProductShowcase() {
       originalPrice: "$39",
       category: "cards",
       badge: "Best Seller",
-      description: "Ultra-thin smart tracker the size of a credit card"
+      description: "Ultra-thin smart tracker the size of a credit card",
+      handle: "zuno-card"
     },
     {
       id: 2,
@@ -19,7 +20,8 @@ export default function ProductShowcase() {
       price: "$39",
       category: "keys",
       badge: "New",
-      description: "Perfect tracker for your keychain"
+      description: "Perfect tracker for your keychain",
+      handle: "zuno-key"
     },
     {
       id: 3,
@@ -27,21 +29,24 @@ export default function ProductShowcase() {
       price: "$49",
       category: "cards",
       badge: "Premium",
-      description: "Professional grade tracker with advanced features"
+      description: "Professional grade tracker with advanced features",
+      handle: "zuno-pro"
     },
     {
       id: 4,
       name: "Charging Pad",
       price: "$19",
       category: "accessories",
-      description: "Wireless charging station for your Zuno devices"
+      description: "Wireless charging station for your Zuno devices",
+      handle: "charging-pad"
     },
     {
       id: 5,
       name: "Protective Case",
       price: "$12",
       category: "accessories",
-      description: "Durable silicone case for extra protection"
+      description: "Durable silicone case for extra protection",
+      handle: "protective-case"
     },
     {
       id: 6,
@@ -49,7 +54,8 @@ export default function ProductShowcase() {
       price: "$24",
       category: "cards",
       badge: "New",
-      description: "Adhesive tracker that sticks to any surface"
+      description: "Adhesive tracker that sticks to any surface",
+      handle: "zuno-sticker"
     }
   ];
 
@@ -96,16 +102,20 @@ export default function ProductShowcase() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {filteredProducts.map((product) => (
-    <a
-      key={product.id}
-      href={`/products/${product.handle}`}
-      className="group bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-3xl overflow-hidden hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 block"
-    >
-      {/* Rest of your product card JSX */}
-    </a>
-  ))}
-</div>
+          {filteredProducts.map((product) => (
+            <a
+              key={product.id}
+              href={`/products/${product.handle}`}
+              className="group bg-background/50 backdrop-blur-md border border-text-muted/20 rounded-3xl overflow-hidden hover:border-highlight/50 transition-all duration-300 transform hover:scale-105 block"
+            >
+              <div className="relative h-64 bg-gradient-to-br from-primary/20 to-highlight/20 flex items-center justify-center">
+                <div className="w-32 h-32 bg-gradient-to-br from-primary to-highlight rounded-2xl shadow-lg group-hover:rotate-6 transition-transform duration-300" />
+                {product.badge && (
+                  <div className="absolute top-4 right-4 bg-highlight text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    {product.badge}
+                  </div>
+                )}
+              </div>
 
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-text-light mb-2">{product.name}</h3>
@@ -118,12 +128,12 @@ export default function ProductShowcase() {
                       <span className="text-sm text-text-muted line-through">{product.originalPrice}</span>
                     )}
                   </div>
-                  <button className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200">
-                    Add to Cart
-                  </button>
+                  <div className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200">
+                    View Details
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
