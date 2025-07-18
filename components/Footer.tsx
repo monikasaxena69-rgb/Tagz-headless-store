@@ -9,11 +9,11 @@ export default function Footer() {
               <img 
                 src="/logo.png" 
                 alt="Zuno Logo" 
-                className="w-12 h-12 object-contain"
+                className="w-20 h-20 object-contain"
               />
             </div>
             <p className="text-text-muted text-sm mb-4">
-              Never lose anything again with our smart tracking technology.
+              Track What Matters. Track With Zuno.
             </p>
             <div className="flex space-x-3">
               <a href="#" className="text-text-muted hover:text-highlight transition-colors">📘</a>
