@@ -10,21 +10,24 @@ export default function Hero() {
       subtitle: "Smart tracking technology that adapts to your lifestyle",
       cta: "Shop Trackers",
       highlight: "New Release",
-      bg: "from-primary/40 via-accent1/30 to-highlight/40"
+      bg: "from-primary/40 via-accent1/30 to-highlight/40",
+      backgroundImage: "/hero-bg-1.png"
     },
     {
       title: "Ultra-Precision Location",
       subtitle: "Find your items within inches, anywhere in the world",
       cta: "Explore Technology", 
       highlight: "Advanced GPS",
-      bg: "from-accent2/40 via-primary/30 to-highlight/50"
+      bg: "from-accent2/40 via-primary/30 to-highlight/50",
+      backgroundImage: "/hero-bg-2.png"
     },
     {
       title: "30-Day Battery Life",
       subtitle: "Worry-free tracking with our revolutionary power system",
       cta: "Learn More",
       highlight: "Long Lasting",
-      bg: "from-highlight/50 via-accent1/30 to-primary/40"
+      bg: "from-highlight/50 via-accent1/30 to-primary/40",
+      backgroundImage: "/hero-bg-1.png"
     }
   ];
 
@@ -56,8 +59,16 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Dynamic background with enhanced transitions */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].bg} transition-all duration-2000 ease-in-out`} />
+      {/* Background image with gradient overlay */}
+      <div className="absolute inset-0 transition-all duration-2000 ease-in-out">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-2000 ease-in-out"
+          style={{
+            backgroundImage: `url(${slides[currentSlide].backgroundImage})`,
+          }}
+        />
+        <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].bg} transition-all duration-2000 ease-in-out`} />
+      </div>
       
       {/* Floating particles */}
       <div className="absolute inset-0">
