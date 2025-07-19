@@ -45,7 +45,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigaion */}
           <nav className="hidden md:flex items-center space-x-8">
             {[
               { name: 'Features', id: 'features' },
